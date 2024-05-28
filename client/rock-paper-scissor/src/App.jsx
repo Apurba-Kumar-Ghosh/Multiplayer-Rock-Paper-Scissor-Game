@@ -1,11 +1,11 @@
-import logo from './logo.svg';
 import React, {useEffect, useState} from 'react'
 import './App.css';
 import { socket } from './socket';
 
 function App() {
   const [joinedRoomId, setRoomId] = useState(null)
-  const [inputRoomId, setInputRoomId] = useState()
+  const [availableRooms, setAvailableRooms] = useState([])
+  const [gameMode, setGameMode] = useState("Waiting")
 
   useEffect(() => {
     const onSocketConnected = () => {
@@ -19,24 +19,44 @@ function App() {
     }
   }, [])
 
+
   useEffect(() => {
-    socket.on("joinedRoom", onRoomJoined)
+    socket.on("availableRooms", onRoomsAvailable)
+
+    return () => {
+      socket.off('availableRooms')
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  const onRoomsAvailable = ({rooms}) => {
+    setAvailableRooms(rooms.filter(room => room !== joinedRoomId))
+  }
+
+  useEffect(() => {
+    socket.on("createdGame", onRoomJoined)
 
     socket.on("roomError", onRoomError)
 
+    socket.on("playersConnected", onStartGame)
+
 
     return () => {
-      socket.off("joinedRoom", onRoomJoined)
+      socket.off("createdGame", onRoomJoined)
       socket.off('roomError', onRoomError)
+      socket.off('playersConnected', onStartGame)
     }
   }, [])
 
+  const onStartGame = () => {
+    setGameMode("playing")
+  }
+
   const onRoomError = ({message}) => {
-    console.log('room joining error', message)
+    console.error('room joining error', message)
   }
 
   const onRoomJoined = ({roomId}) => {
-    console.log('joined room', roomId)
     setRoomId(roomId)
   }
 
@@ -44,17 +64,13 @@ function App() {
     socket.emit("createGame")
   }
 
-  const onJoinGame = () => {
-    socket.emit("joinGame", {roomId: inputRoomId})
-  }
-
-  const onSubmit = (event) => {
-    event.preventDefault()
-    onJoinGame()
+  const onJoinGame = (roomId) => {
+    socket.emit("joinGame", {roomId})
   }
 
   return (
     <div className="hello">
+      {gameMode !== "playing" ? (<>
       {joinedRoomId && (
         <div className="joined">
           Joined Room Id {joinedRoomId}
@@ -63,15 +79,26 @@ function App() {
       <button className="createGame" onClick={onCreateGame}>
         Create Game
       </button>
-      <form onSubmit={onSubmit}>
-        <input type="text" required value={inputRoomId} onChange={(event) => {
-          setInputRoomId(event.target.value)
-        }} />
-        <button type="submit" className="joinGame">
-        Join Game
-        </button>
-      </form>
-
+      <div className="avaialableRooms">
+        {availableRooms.map((room, index) => {
+          return (
+            <div>
+              <div>
+              {`${index}. ${room}`}
+              </div>
+              <button className="join" onClick={() => {onJoinGame(room)}}>
+                Join
+              </button>
+            </div>
+          )
+        })}
+      </div>
+      </>
+      ) : (
+        <div className="gameArea">
+          Game Started between two players
+        </div>
+      )}
     </div>
   );
 }

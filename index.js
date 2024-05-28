@@ -8,7 +8,7 @@ const server = http.createServer(app)
 
 const {Server} = require("socket.io")
 
-const rooms = []
+let rooms = []
 
 const io = new Server(server, {
     cors: {
@@ -24,6 +24,8 @@ app.get('/test', (req, res) => {
 io.on('connection', (socket) => {
     console.log('a client connected')
 
+    socket.emit('availableRooms', {rooms})
+
     socket.on('disconnect', () => {
         console.log('disconnected')
     }) 
@@ -33,16 +35,15 @@ io.on('connection', (socket) => {
 
         socket.join(roomId)
         rooms.push(roomId)
-        socket.emit('joinedRoom', {roomId})
+        socket.emit('createdGame', {roomId})
     })
 
     socket.on('joinGame', ({roomId}) => {
-        console.log('server join game', roomId)
-
         if(rooms.includes(roomId)) {
             socket.join(roomId)
-            socket.emit('joinedRoom', {roomId})
-            console.log('room joined', roomId)
+            rooms = rooms.filter(room => room !== roomId)
+            socket.to(roomId).emit('playersConnected', {roomId})
+            socket.emit('playersConnected', {roomId})
         } else {
             socket.emit("roomError", {message: "Room does not exist"})
         }
