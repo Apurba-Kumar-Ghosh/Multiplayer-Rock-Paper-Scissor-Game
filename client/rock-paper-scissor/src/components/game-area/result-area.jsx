@@ -47,6 +47,7 @@ const S = {
     font-style: italics;
   `,
   Description: styled.h3`
+    font-family: "Edu TAS Beginner", sans-serif;
     font-size: 18px;
     text-align: center;
   `,
@@ -65,7 +66,24 @@ const S = {
 const getTextToShow = (userSelection, oppositionSelection) => {
   if (!userSelection) return "Make your choice";
 
-  if (!oppositionSelection) return "Waiting for opponent to choose.";
+  if (!userSelection && oppositionSelection)
+    return "Opponent has made his move. What about you?";
 
-  return "";
+  if (!oppositionSelection) return "Waiting for opponent to choose.";
+  if (oppositionSelection === userSelection) return "STALEMATE!!! GO AGAIN!!!";
+
+  const userValue = subs[userSelection];
+  const oppValue = subs[oppositionSelection];
+
+  const winner = (3 + userValue - oppValue) % 3;
+
+  if (winner === 1) return "You have won this round!!!";
+
+  if (winner === 2) return "Alas!! You have been defeated this time around";
+};
+
+const subs = {
+  rock: 0,
+  paper: 1,
+  scissor: 2,
 };

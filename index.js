@@ -69,7 +69,6 @@ io.on("connection", (socket) => {
         roomsInUse[room] = {
           players: playersObj,
         };
-        console.log(roomsInUse, room);
       }
     } else {
       const newRoom = makeId(8);
@@ -88,6 +87,7 @@ io.on("connection", (socket) => {
         p1: playerObj.p1.choice,
         p2: playerObj.p2.choice,
       });
+      console.log("winner", winner);
       declareWinner(winner, roomId);
     }
   });
@@ -102,6 +102,7 @@ io.on("connection", (socket) => {
         p1: playerObj.p1.choice,
         p2: playerObj.p2.choice,
       });
+      console.log("winner", winner);
       declareWinner(winner, roomId);
     }
   });
@@ -112,21 +113,19 @@ server.listen(4000, () => {
 });
 
 function checkWinner({ p1, p2 }) {
-  setTimeout(() => {
-    if (p1 === "scissor") {
-      if (p2 === "rock") return "p2";
-      else if (p2 === "paper") return "p1";
-      else return "d";
-    } else if (p1 === "rock") {
-      if (p2 === "scissor") return "p1";
-      else if (p2 === "paper") return "p2";
-      else return "d";
-    } else {
-      if (p2 === "rock") return "p1";
-      else if (p2 == "scissor") return "p2";
-      else return "d";
-    }
-  }, 2500);
+  if (p1 === "scissor") {
+    if (p2 === "rock") return "p2";
+    else if (p2 === "paper") return "p1";
+    else return "d";
+  } else if (p1 === "rock") {
+    if (p2 === "scissor") return "p1";
+    else if (p2 === "paper") return "p2";
+    else return "d";
+  } else {
+    if (p2 === "rock") return "p1";
+    else if (p2 == "scissor") return "p2";
+    else return "d";
+  }
 }
 
 function declareWinner(winner, roomId) {

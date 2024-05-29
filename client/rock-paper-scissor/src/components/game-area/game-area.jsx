@@ -151,5 +151,6 @@ const S = {
   Point: styled.p``,
   Score: styled.div`
     text-align: center;
+    font-weight: 700;
   `,
 };

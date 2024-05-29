@@ -12,7 +12,7 @@ export const Leaderboard = () => {
           <S.Img width={30} height={30} src={Images.trophy} alt="trophy-icon" />
           <S.h1>Most Points Scored</S.h1>
         </S.Header>
-        {Object.entries(leaderboard).map((entry, index) => (
+        {getTopFive(leaderboard).map((entry, index) => (
           <S.ListItem key={entry[0]}>
             <S.Bullet>{index + 1}</S.Bullet>
             <S.Text>{entry[0]}</S.Text>
@@ -22,6 +22,14 @@ export const Leaderboard = () => {
       </S.Table>
     )
   );
+};
+
+const getTopFive = (leaderboard) => {
+  const entries = Object.entries(leaderboard)
+    .sort((entryA, entryB) => entryB[1] - entryA[1])
+    .splice(0, 5);
+
+  return entries;
 };
 
 const S = {
