@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { MaterialTextInput } from "./material-text-input";
 import { SubmitBtn } from "./submit-btn";
 import styled from "styled-components";
 
-export const AddUsername = ({ onSubmit, value, onChange, error }) => {
+export const AddUsername = ({ onAddUsername, value, onChange }) => {
+  const [error, setError] = useState();
+
+  const onSubmit = () => {
+    if (value === "") setError("username is required to play");
+    else onAddUsername(value);
+  };
+
   return (
     <S.Container>
       <MaterialTextInput value={value} onChange={onChange} error={error} />

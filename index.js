@@ -12,6 +12,8 @@ let players = [];
 
 let availableRooms = [];
 
+let roomsInUse = {};
+
 const io = new Server(server, {
   cors: {
     origin: "http://localhost:3000",
@@ -23,10 +25,10 @@ app.get("/test", (req, res) => {
 });
 
 io.on("connection", (socket) => {
-  console.log("a client connected");
+  //   console.log("a client connected");
 
   socket.on("disconnect", () => {
-    console.log("disconnected");
+    // console.log("disconnected");
   });
 
   socket.on("findPlayer", ({ username }) => {
@@ -45,13 +47,11 @@ io.on("connection", (socket) => {
 
         const p1 = {
           username: playersForGame[0],
-          points: 0,
-          selection: null,
+          choice: null,
         };
         const p2 = {
           username: playersForGame[1],
-          points: 0,
-          selection: null,
+          choice: null,
         };
         const playersObj = {
           p1,
@@ -66,6 +66,10 @@ io.on("connection", (socket) => {
           allPlayers: playersObj,
         });
         availableRooms.shift();
+        roomsInUse[room] = {
+          players: playersObj,
+        };
+        console.log(roomsInUse, room);
       }
     } else {
       const newRoom = makeId(8);
@@ -73,11 +77,63 @@ io.on("connection", (socket) => {
       availableRooms.push(newRoom);
     }
   });
+
+  socket.on("p2Choice", ({ value, roomId }) => {
+    socket.to(roomId).emit("playerChoice", { value, player: "p2" });
+    roomsInUse[roomId].players.p2.choice = value;
+    const playerObj = roomsInUse[roomId].players;
+
+    if (playerObj.p1.choice !== null) {
+      const winner = checkWinner({
+        p1: playerObj.p1.choice,
+        p2: playerObj.p2.choice,
+      });
+      declareWinner(winner, roomId);
+    }
+  });
+
+  socket.on("p1Choice", ({ value, roomId }) => {
+    socket.to(roomId).emit("playerChoice", { value, player: "p1" });
+    roomsInUse[roomId].players.p1.choice = value;
+    const playerObj = roomsInUse[roomId].players;
+
+    if (playerObj.p2.choice !== null) {
+      const winner = checkWinner({
+        p1: playerObj.p1.choice,
+        p2: playerObj.p2.choice,
+      });
+      declareWinner(winner, roomId);
+    }
+  });
 });
 
 server.listen(4000, () => {
   console.log("listening on port 4000");
 });
+
+function checkWinner({ p1, p2 }) {
+  setTimeout(() => {
+    if (p1 === "scissor") {
+      if (p2 === "rock") return "p2";
+      else if (p2 === "paper") return "p1";
+      else return "d";
+    } else if (p1 === "rock") {
+      if (p2 === "scissor") return "p1";
+      else if (p2 === "paper") return "p2";
+      else return "d";
+    } else {
+      if (p2 === "rock") return "p1";
+      else if (p2 == "scissor") return "p2";
+      else return "d";
+    }
+  }, 2500);
+}
+
+function declareWinner(winner, roomId) {
+  io.sockets.to(roomId).emit("decision", { winner });
+  roomsInUse[roomId].players.p1.choice = null;
+  roomsInUse[roomId].players.p2.choice = null;
+}
 
 function makeId(length) {
   let result = "";

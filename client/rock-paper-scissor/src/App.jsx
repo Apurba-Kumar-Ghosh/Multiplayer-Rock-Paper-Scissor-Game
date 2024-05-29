@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import "./App.css";
-import { socket } from "./socket";
+import { useSocketContext } from "./socket";
 import { AddUsername } from "./components/add-username";
 import { GameArea } from "./components/game-area/game-area";
 import { LoadingSpinner } from "./components/loading-spinner";
@@ -9,8 +9,9 @@ import { LoadingSpinner } from "./components/loading-spinner";
 function App() {
   const [username, setUsername] = useState("");
   const [gameState, setGameState] = useState("none");
-  const [error, setError] = useState();
-  const [opponent, setOpponent] = useState();
+  const [players, setPlayers] = useState();
+  const [roomId, setRoomId] = useState();
+  const { socket } = useSocketContext();
 
   useEffect(() => {
     socket.on("playersConnected", createGamePeripherals);
@@ -23,28 +24,27 @@ function App() {
 
   const createGamePeripherals = ({ roomId, allPlayers }) => {
     setGameState("joined");
+    setRoomId(roomId);
     const p1 = allPlayers.p1.username;
     const p2 = allPlayers.p2.username;
-
-    if (p1 === username) setOpponent(p2);
-    else setOpponent(p1);
+    setPlayers({
+      p1,
+      p2,
+    });
   };
 
-  const onAddUsername = () => {
-    if (username !== "") {
-      socket.emit("findPlayer", { username });
-      setGameState("waiting");
-    } else setError("Username is required to start the game");
+  const onAddUsername = (value) => {
+    socket.emit("findPlayer", { username: value });
+    setGameState("waiting");
   };
 
   const content = {
     none: (
       <S.Container>
         <AddUsername
+          onAddUsername={onAddUsername}
           value={username}
           onChange={setUsername}
-          onSubmit={onAddUsername}
-          error={error}
         />
       </S.Container>
     ),
@@ -53,15 +53,14 @@ function App() {
         <AddUsername
           value={username}
           onChange={setUsername}
-          onSubmit={onAddUsername}
-          error={error}
+          onAddUsername={onAddUsername}
         />
         <LoadingSpinner />
       </S.Container>
     ),
     joined: (
       <S.Container>
-        <GameArea username={username} opponent={opponent} />
+        <GameArea username={username} players={players} roomId={roomId} />
       </S.Container>
     ),
   };
@@ -73,6 +72,7 @@ const S = {
   Container: styled.section`
     width: 100vw;
     height: 100vh;
+    padding: 2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
