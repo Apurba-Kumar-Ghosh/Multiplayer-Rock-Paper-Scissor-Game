@@ -21,7 +21,7 @@ export const AddUsername = ({ onAddUsername, value, onChange }) => {
 
 const S = {
   Container: styled.section`
-    margin-block: 10rem 2rem;
+    margin-block: 4rem 2rem;
     display: flex;
     flex-direction: column;
     align-items: center;

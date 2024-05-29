@@ -5,6 +5,8 @@ import { useSocketContext } from "./socket";
 import { AddUsername } from "./components/add-username";
 import { GameArea } from "./components/game-area/game-area";
 import { LoadingSpinner } from "./components/loading-spinner";
+import { Leaderboard } from "./components/leaderboard";
+import { AppHeader } from "./components/app-header";
 
 function App() {
   const [username, setUsername] = useState("");
@@ -41,15 +43,18 @@ function App() {
   const content = {
     none: (
       <S.Container>
+        <AppHeader />
         <AddUsername
           onAddUsername={onAddUsername}
           value={username}
           onChange={setUsername}
         />
+        <Leaderboard />
       </S.Container>
     ),
     waiting: (
       <S.Container>
+        <AppHeader />
         <AddUsername
           value={username}
           onChange={setUsername}
@@ -60,6 +65,7 @@ function App() {
     ),
     joined: (
       <S.Container>
+        <AppHeader />
         <GameArea username={username} players={players} roomId={roomId} />
       </S.Container>
     ),
@@ -69,9 +75,8 @@ function App() {
 }
 
 const S = {
-  Container: styled.section`
-    width: 100vw;
-    height: 100vh;
+  Container: styled.div`
+    height: 100%;
     padding: 2rem;
     display: flex;
     flex-direction: column;

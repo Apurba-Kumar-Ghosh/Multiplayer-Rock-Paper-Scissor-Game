@@ -8,7 +8,7 @@ export const MaterialTextInput = ({ value, onChange, error }) => (
       onChange={(event) => {
         onChange(event.target.value);
       }}
-      placeholder="Enter your name"
+      placeholder=""
     />
     <S.Label>Enter your username</S.Label>
     {error && <S.Error>*{error}</S.Error>}
@@ -23,18 +23,18 @@ const S = {
     margin-block: 2rem;
   `,
   Input: styled.input`
+    background: transparent;
     width: 20rem;
     font-size: 14px;
     height: 2rem;
     padding: 0.5rem;
     border-radius: 6px;
     outline: none;
-    border: 1px solid black;
-    transition: 0.1s ease-out;
-
-    &:focus {
-      border-color: #3449eb;
-    }
+    background: #f39264;
+    border: none;
+    outline: none;
+    color: #3a404d;
+    transition: 0.2s ease-out;
 
     &:focus + span {
       top: 0;
@@ -53,14 +53,13 @@ const S = {
   Label: styled.span`
     position: absolute;
     font-size: 1rem;
-    background-color: white;
-    color: grey;
+    color: #3a404d;
     top: 50%;
     left: 2%;
     transform: translateY(-50%);
     margin: 0 0.5px;
     padding: 0 0.3px;
-    transition: 0.1s ease-out;
+    transition: 0.2s ease-out;
     pointer-events: none;
   `,
   Error: styled.p`
