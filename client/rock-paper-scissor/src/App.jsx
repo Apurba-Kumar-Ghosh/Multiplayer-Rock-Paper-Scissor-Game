@@ -1,106 +1,82 @@
-import React, {useEffect, useState} from 'react'
-import './App.css';
-import { socket } from './socket';
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
+import "./App.css";
+import { socket } from "./socket";
+import { AddUsername } from "./components/add-username";
+import { GameArea } from "./components/game-area/game-area";
+import { LoadingSpinner } from "./components/loading-spinner";
 
 function App() {
-  const [joinedRoomId, setRoomId] = useState(null)
-  const [availableRooms, setAvailableRooms] = useState([])
-  const [gameMode, setGameMode] = useState("Waiting")
+  const [username, setUsername] = useState("");
+  const [gameState, setGameState] = useState("none");
+  const [error, setError] = useState();
+  const [opponent, setOpponent] = useState();
 
   useEffect(() => {
-    const onSocketConnected = () => {
-      console.log('connected')
-    }
-
-    socket.on('connect', onSocketConnected)
+    socket.on("playersConnected", createGamePeripherals);
 
     return () => {
-      socket.off('connect', onSocketConnected)
-    }
-  }, [])
+      socket.off("playersConnected", createGamePeripherals);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [username]);
 
+  const createGamePeripherals = ({ roomId, allPlayers }) => {
+    setGameState("joined");
+    const p1 = allPlayers.p1.username;
+    const p2 = allPlayers.p2.username;
 
-  useEffect(() => {
-    socket.on("availableRooms", onRoomsAvailable)
+    if (p1 === username) setOpponent(p2);
+    else setOpponent(p1);
+  };
 
-    return () => {
-      socket.off('availableRooms')
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  const onAddUsername = () => {
+    if (username !== "") {
+      socket.emit("findPlayer", { username });
+      setGameState("waiting");
+    } else setError("Username is required to start the game");
+  };
 
-  const onRoomsAvailable = ({rooms}) => {
-    setAvailableRooms(rooms.filter(room => room !== joinedRoomId))
-  }
+  const content = {
+    none: (
+      <S.Container>
+        <AddUsername
+          value={username}
+          onChange={setUsername}
+          onSubmit={onAddUsername}
+          error={error}
+        />
+      </S.Container>
+    ),
+    waiting: (
+      <S.Container>
+        <AddUsername
+          value={username}
+          onChange={setUsername}
+          onSubmit={onAddUsername}
+          error={error}
+        />
+        <LoadingSpinner />
+      </S.Container>
+    ),
+    joined: (
+      <S.Container>
+        <GameArea username={username} opponent={opponent} />
+      </S.Container>
+    ),
+  };
 
-  useEffect(() => {
-    socket.on("createdGame", onRoomJoined)
-
-    socket.on("roomError", onRoomError)
-
-    socket.on("playersConnected", onStartGame)
-
-
-    return () => {
-      socket.off("createdGame", onRoomJoined)
-      socket.off('roomError', onRoomError)
-      socket.off('playersConnected', onStartGame)
-    }
-  }, [])
-
-  const onStartGame = () => {
-    setGameMode("playing")
-  }
-
-  const onRoomError = ({message}) => {
-    console.error('room joining error', message)
-  }
-
-  const onRoomJoined = ({roomId}) => {
-    setRoomId(roomId)
-  }
-
-  const onCreateGame = () => {
-    socket.emit("createGame")
-  }
-
-  const onJoinGame = (roomId) => {
-    socket.emit("joinGame", {roomId})
-  }
-
-  return (
-    <div className="hello">
-      {gameMode !== "playing" ? (<>
-      {joinedRoomId && (
-        <div className="joined">
-          Joined Room Id {joinedRoomId}
-        </div>
-      )}
-      <button className="createGame" onClick={onCreateGame}>
-        Create Game
-      </button>
-      <div className="avaialableRooms">
-        {availableRooms.map((room, index) => {
-          return (
-            <div>
-              <div>
-              {`${index}. ${room}`}
-              </div>
-              <button className="join" onClick={() => {onJoinGame(room)}}>
-                Join
-              </button>
-            </div>
-          )
-        })}
-      </div>
-      </>
-      ) : (
-        <div className="gameArea">
-          Game Started between two players
-        </div>
-      )}
-    </div>
-  );
+  return content[gameState];
 }
+
+const S = {
+  Container: styled.section`
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  `,
+};
 
 export default App;
