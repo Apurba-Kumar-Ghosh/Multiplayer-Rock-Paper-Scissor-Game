@@ -70,6 +70,11 @@ const S = {
     background: #d7514d;
     grid-template-columns: 1fr 3fr 2fr;
     align-items: center;
+    transition: 0.1s linear;
+
+    &:hover {
+      transform: scaleX(1.1);
+    }
   `,
   Bullet: styled.span`
     width: 2rem;
