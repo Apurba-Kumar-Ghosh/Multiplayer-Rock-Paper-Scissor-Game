@@ -12,7 +12,7 @@ export const Leaderboard = () => {
       <S.Table>
         <S.Header>
           <Icon name="trophy" size={30} color="#F26856" />
-          <S.h1>Most Points Scored</S.h1>
+          <S.h1>Points Leaderboard</S.h1>
         </S.Header>
         {getTopFive(leaderboard).map((entry, index) => (
           <S.ListItem key={entry[0]}>
