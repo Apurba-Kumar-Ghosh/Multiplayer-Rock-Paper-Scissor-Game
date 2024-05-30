@@ -1,11 +1,13 @@
 This is a multiplayer rock paper and scissor game created using React and Socket.io along with Express and Nodejs.
 
-Steps to start in your local server:
+If you only want to play: https://apurba-ghosh-game.netlify.app/
+
+This project contains both the server(index.js) and the client(/client/rock-paper-scissor)
+If you want to take a peek at the code do the following to get started on your local machine:
 1. Open repository directory in terminal
 2. Run Command -> `npm run build-start-server` -> This command will install all dependencies and start your server
 3. Open a new terminal instance
 4. Run Command -> `npm run build-start-client` -> This command will install all dependencies ans start your client -> You should be redirected to localhost:3000 once this command is completed.
-
 
 Steps to play:
 1. After you have got the project running (both client and server)
