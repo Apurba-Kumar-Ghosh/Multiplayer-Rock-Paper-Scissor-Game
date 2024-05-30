@@ -15,7 +15,7 @@ let availableRooms = [];
 let roomsInUse = {};
 
 app.get("/healthcheck", (req, res) => {
-  res.send("App Running");
+  res.status(200).send("App Running");
 });
 
 const io = new Server(server, {
