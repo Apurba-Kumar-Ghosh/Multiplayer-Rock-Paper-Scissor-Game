@@ -59,7 +59,7 @@ const S = {
     }
 
     @media(max-width: 650px) {
-      width: 10rem;
+      width: 15rem;
     }
   `,
   Label: styled.span`
@@ -77,6 +77,6 @@ const S = {
   Error: styled.p`
     position: absolute;
     bottom: -40px;
-    color: red;
+    color: ${Colors.error};
   `,
 };

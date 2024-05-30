@@ -7,6 +7,8 @@ import { GameArea } from "../game-area";
 import { LoadingSpinner } from "../components/atoms/loading-spinner";
 import { Leaderboard } from "./components/leaderboard";
 import { AppHeader } from "../components/organisms/app-header";
+import { Text } from "../components/atoms/text";
+import { Colors } from "../utils/style-helpers/color-styles";
 
 export const LandingPage = () => {
   const [username, setUsername] = useState("");
@@ -72,6 +74,14 @@ export const LandingPage = () => {
           onChange={setUsername}
           onAddUsername={onAddUsername}
         />
+        <Text
+          textalign="center"
+          size="large"
+          color={Colors.primary}
+          weight="mediumStrong"
+        >
+          Please wait while we find an opponent for you...
+        </Text>
         <LoadingSpinner />
       </>
     ),

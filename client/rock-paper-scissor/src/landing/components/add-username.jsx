@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FloatingLabelTextInput } from "../../components/organisms/floating-label-text-input";
 import { Button } from "../../components/atoms/button";
 import styled from "styled-components";
@@ -9,8 +9,12 @@ export const AddUsername = ({ onAddUsername, value, onChange, gameState }) => {
   const [error, setError] = useState();
   const { width } = useWindowDimensions();
 
+  useEffect(() => {
+    setError(undefined);
+  }, [value]);
+
   const onSubmit = () => {
-    if (value === "") setError("username is required to play");
+    if (value === "") setError("Please enter username");
     else onAddUsername(value);
   };
 

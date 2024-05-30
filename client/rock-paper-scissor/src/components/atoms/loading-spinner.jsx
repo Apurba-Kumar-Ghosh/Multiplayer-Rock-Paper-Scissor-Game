@@ -15,6 +15,7 @@ const DEFAULTSIZE = 80;
 const S = {
   Ring: styled.div`
     display: inline-block;
+    margin-top: 1rem;
     position: relative;
     box-sizing: border-box;
     width: ${({ size }) => `${size}px`};
