@@ -6,22 +6,18 @@ This project contains both the server(index.js) and the client(/client/rock-pape
 Also a separate repo is available if you just want to take a look at client side code: https://github.com/Apurba-Kumar-Ghosh/Stone-Paper-Scissor-App-Client
 If you want to take a peek at the code do the following to get started on your local machine:
 1. Open repository directory in terminal
-2. Run Command -> `npm run build-start-server` -> This command will install all dependencies and start your server
-3. Open a new terminal instance
-4. Run Command -> `npm run build-start-client` -> This command will install all dependencies ans start your client -> You should be redirected to localhost:3000 once this command is completed.
+2. Run Command -> `npm run build-start-client` -> This command will install all dependencies ans start your client -> You should be redirected to localhost:3000 once this command is completed.
 
 Steps to play:
-1. After you have got the project running (both client and server)
-2. You should be redirected to `localhost:3000`
-3. You should be able to see the landing page of client
-4. Enter your username and click on Join Game
-5. You will be added to waiting lobby -> waiting for opponent to get matched
-6. Open new tab and go to `localhost:3000` and do the same there.
-7. You can create as many game instances as you want. Each instance will be paired with another instance(if available).
-8. You should be redirected into a game of Rock Paper and Scissor
-9. Play and see if you can win against yourself
-10. If your opponent gets disconnected -> you will be removed from the game as well.
-11. After 1 game you should be able to see the Points Leaderboar on the landing page.
+1. Open `https://apurba-ghosh-game.netlify.app/` or open `localhost:3000` after starting from local terminal
+2. You should be able to see the landing page of client along with current Leaderboard
+3. Enter your username and click on Join Game
+4. You will be added to waiting lobby -> waiting for opponent to get matched
+5. Open new browser/tab/pc and go to `https://apurba-ghosh-game.netlify.app` and do the same there with a new username or ask a friend to do the same.
+6. You can create as many players as you want. Each player will be paired with another player(if available).
+7. You should be redirected into a game of Rock Paper and Scissor
+8. Play and see if you can win against your friend/yourself
+9. If your opponent gets disconnected(closes browser tab) -> you will be removed from the game as well.
 
 Have fun playing.
 
