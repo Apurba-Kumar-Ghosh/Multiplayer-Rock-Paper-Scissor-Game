@@ -78,7 +78,7 @@ export const GameArea = ({ username, players, roomId }) => {
     <S.GameArea>
       <S.Players>
         <S.Score>
-          <S.Text>{username}</S.Text>
+          <S.Text>{`${username}(You)`}</S.Text>
           <S.Point>{userScore}</S.Point>
         </S.Score>
         <S.Score>

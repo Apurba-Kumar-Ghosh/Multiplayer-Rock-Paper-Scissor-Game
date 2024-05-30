@@ -35,11 +35,14 @@ const S = {
     align-items: center;
     border-radius: 8px;
     background: ${({ ischoice }) =>
-      ischoice ? Colors.highlight : "transparent"};
+      ischoice ? Colors.primary : "transparent"};
+    transition: 0.2s ease-out;
 
     &:hover {
-      background: ${Colors.highlight};
+      background: ${({ ischoice }) =>
+        ischoice ? Colors.primary : Colors.primaryFaded};
       cursor: pointer;
+      transform: scale(0.95);
     }
 
     &.animation {

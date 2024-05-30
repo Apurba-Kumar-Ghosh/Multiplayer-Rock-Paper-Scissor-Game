@@ -4,4 +4,5 @@ export const Colors = {
   secondary: "#3449eb",
   highlight: "aqua",
   tertiary: "white",
+  primaryFaded: "#3a404d80",
 };
