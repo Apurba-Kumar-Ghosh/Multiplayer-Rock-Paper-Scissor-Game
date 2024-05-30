@@ -31,14 +31,12 @@ const S = {
     margin-block: 2rem;
   `,
   Input: styled.input`
-    background: transparent;
     width: 20rem;
     font-size: 14px;
     height: 2rem;
     padding: 0.5rem;
     border-radius: 6px;
-    outline: none;
-    background: #f39264;
+    background: ${Colors.background};
     border: none;
     outline: none;
     color: ${Colors.primary};

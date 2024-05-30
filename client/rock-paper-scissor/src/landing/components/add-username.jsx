@@ -7,7 +7,7 @@ import { Text } from "../../components/atoms/text";
 
 export const AddUsername = ({ onAddUsername, value, onChange, gameState }) => {
   const [error, setError] = useState();
-  const { width, height } = useWindowDimensions();
+  const { width } = useWindowDimensions();
 
   const onSubmit = () => {
     if (value === "") setError("username is required to play");
@@ -28,7 +28,7 @@ export const AddUsername = ({ onAddUsername, value, onChange, gameState }) => {
         onChange={onChange}
         error={error}
         disabled={isDisabled}
-        label="Enter your username"
+        label="Username"
       />
       <Button onClick={onSubmit} title="Join a game" disabled={isDisabled} />
     </S.Container>
