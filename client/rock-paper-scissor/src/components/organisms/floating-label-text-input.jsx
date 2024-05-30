@@ -59,6 +59,10 @@ const S = {
     &:not(:focus)::placeholder {
       opacity: 0;
     }
+
+    @media(max-width: 650px) {
+      width: 10rem;
+    }
   `,
   Label: styled.span`
     position: absolute;

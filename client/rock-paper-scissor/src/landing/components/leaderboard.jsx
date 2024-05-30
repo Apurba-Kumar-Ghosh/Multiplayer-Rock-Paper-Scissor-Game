@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useLeaderboard } from "../../hooks/use-leaderboard";
 import { Icon } from "../../components/icon/icon";
 import { Colors } from "../../utils/style-helpers/color-styles";
+import { Text } from "../../components/atoms/text";
 
 export const Leaderboard = () => {
   const { leaderboard } = useLeaderboard();
@@ -16,8 +17,12 @@ export const Leaderboard = () => {
         {getTopFive(leaderboard).map((entry, index) => (
           <S.ListItem key={entry[0]}>
             <S.Bullet>{index + 1}</S.Bullet>
-            <S.Text>{entry[0]}</S.Text>
-            <S.Text textAlign="right">{entry[1]}</S.Text>
+            <Text textAlign="left" color={Colors.tertiary}>
+              {entry[0]}
+            </Text>
+            <Text textAlign="right" color={Colors.tertiary}>
+              {entry[1]}
+            </Text>
           </S.ListItem>
         ))}
       </S.Table>
@@ -82,11 +87,5 @@ const S = {
     display: flex;
     justify-content: center;
     align-items: center;
-  `,
-  Text: styled.p`
-    font-size: 14px;
-    line-height: 20px;
-    color: white;
-    text-align: ${({ textAlign }) => (textAlign ? textAlign : "left")};
   `,
 };

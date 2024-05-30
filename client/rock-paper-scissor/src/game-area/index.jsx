@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { OptionCard } from "./components/option-card";
 import { ResultArea } from "./components/result-area";
 import { useLeaderboard } from "../hooks/use-leaderboard";
+import { Scorecard } from "./components/score-card";
 
 export const GameArea = ({ username, players, roomId }) => {
   const [userScore, setUserScore] = useState(0);
@@ -62,9 +63,7 @@ export const GameArea = ({ username, players, roomId }) => {
     }
   };
 
-  const declareDraw = () => {
-    console.log("draw");
-  };
+  const declareDraw = () => {};
 
   const declareWinner = () => {
     setUserScore((prev) => prev + 1);
@@ -76,16 +75,12 @@ export const GameArea = ({ username, players, roomId }) => {
 
   return (
     <S.GameArea>
-      <S.Players>
-        <S.Score>
-          <S.Text>{`${username}(You)`}</S.Text>
-          <S.Point>{userScore}</S.Point>
-        </S.Score>
-        <S.Score>
-          <S.Text>{players[opponent]}</S.Text>
-          <S.Point>{oppScore}</S.Point>
-        </S.Score>
-      </S.Players>
+      <Scorecard
+        user={username}
+        userScore={userScore}
+        opp={players[opponent]}
+        oppScore={oppScore}
+      />
       <S.Game>
         <OptionCard
           cardType="rock"
@@ -117,17 +112,6 @@ const S = {
     height: 100%;
     margin-block: 2rem 0;
   `,
-  Players: styled.div`
-    width: 50%;
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
-    gap: 20rem;
-
-    @media (max-width: 650px) {
-      gap: 5rem;
-    }
-  `,
   Game: styled.div`
     width: 50%;
     margin: 0 auto;
@@ -140,17 +124,5 @@ const S = {
       flex-direction: column;
       gap: 3rem;
     }
-  `,
-  Card: styled.img`
-    width: 200px;
-    object-fit: contain;
-  `,
-  ScoreCard: styled.div``,
-  RestartGame: styled.div``,
-  Text: styled.p``,
-  Point: styled.p``,
-  Score: styled.div`
-    text-align: center;
-    font-weight: 700;
   `,
 };

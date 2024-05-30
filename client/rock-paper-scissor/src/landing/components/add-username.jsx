@@ -2,9 +2,12 @@ import React, { useState } from "react";
 import { FloatingLabelTextInput } from "../../components/organisms/floating-label-text-input";
 import { Button } from "../../components/atoms/button";
 import styled from "styled-components";
+import { useWindowDimensions } from "../../hooks/use-window-dimensions";
+import { Text } from "../../components/atoms/text";
 
 export const AddUsername = ({ onAddUsername, value, onChange, gameState }) => {
   const [error, setError] = useState();
+  const { width, height } = useWindowDimensions();
 
   const onSubmit = () => {
     if (value === "") setError("username is required to play");
@@ -15,7 +18,11 @@ export const AddUsername = ({ onAddUsername, value, onChange, gameState }) => {
 
   return (
     <S.Container>
-      <S.Text>Enter your username and join to play</S.Text>
+      {width > BREAKPOINT && (
+        <Text size="large" weight="strong">
+          Enter your username and join to play
+        </Text>
+      )}
       <FloatingLabelTextInput
         value={value}
         onChange={onChange}
@@ -28,16 +35,17 @@ export const AddUsername = ({ onAddUsername, value, onChange, gameState }) => {
   );
 };
 
+const BREAKPOINT = 650;
+
 const S = {
   Container: styled.section`
-    margin-block: 4rem 2rem;
+    margin-block: 2.5rem 2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-  `,
-  Text: styled.div`
-    font-size: 16px;
-    line-height: 20px;
-    font-weight: 700;
+
+    @media (max-width: ${BREAKPOINT}px) {
+      margin-block: 2rem;
+    }
   `,
 };

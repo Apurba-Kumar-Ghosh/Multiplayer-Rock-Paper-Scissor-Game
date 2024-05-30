@@ -1,9 +1,17 @@
 import styled from "styled-components";
 import { Colors } from "../../utils/style-helpers/color-styles";
+import { Text } from "../atoms/text";
 
 export const AppHeader = ({ title, onClick, btnTitle }) => (
   <S.Header>
-    <S.Text>{title}</S.Text>
+    <Text
+      size="xlarge"
+      weight="mediumStrong"
+      color={Colors.tertiary}
+      lineHeight={4}
+    >
+      {title}
+    </Text>
     {btnTitle && (
       <S.ChangeAccount onClick={onClick}>{btnTitle}</S.ChangeAccount>
     )}
@@ -34,11 +42,6 @@ const S = {
     align-items: center;
     width: 2rem;
   `,
-  Text: styled.p`
-    font-size: 20px;
-    line-height: 26px;
-    color: white;
-  `,
   ChangeAccount: styled.div`
     padding: 5px 10px;
     height: 1.5rem;
@@ -56,6 +59,10 @@ const S = {
       background: ${Colors.secondary};
       color: white;
       transform: scale(1.2);
+    }
+
+    @media (max-width: 360px) {
+      display: none;
     }
   `,
 };

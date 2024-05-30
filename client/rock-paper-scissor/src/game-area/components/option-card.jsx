@@ -3,9 +3,9 @@ import styled, { keyframes } from "styled-components";
 import { Icon } from "../../components/icon/icon";
 import { Colors } from "../../utils/style-helpers/color-styles";
 
-export const OptionCard = ({ cardType, onClick, isChoice }) => (
+export const OptionCard = ({ cardType, onClick, isChoice, noAnimate }) => (
   <S.Card
-    className={isChoice ? "animation" : undefined}
+    className={isChoice && !noAnimate ? "animation" : undefined}
     onClick={onClick}
     ischoice={isChoice}
   >

@@ -1,10 +1,13 @@
 import styled from "styled-components";
 import React from "react";
 import { Colors } from "../../utils/style-helpers/color-styles";
+import { Text } from "./text";
 
 export const Button = ({ onClick, title, disabled, style }) => (
   <S.Button onClick={onClick} disabled={disabled} style={{ ...style }}>
-    <S.Text>{title}</S.Text>
+    <Text size="normal" weight="mediumStrong" lineHeight={3}>
+      {title}
+    </Text>
   </S.Button>
 );
 
@@ -31,14 +34,12 @@ const S = {
       &:hover {
         transform: none;
         cursor: not-allowed;
-        color: ${Colors.secondary};
+        color: ${Colors.secondary} !important;
       }
     }
-  `,
-  Text: styled.p`
-    font-size: 16px;
-    line-height: 20px;
-    font-weight: 600;
-    text-align: center;
+
+    &:hover > span {
+      color: white !important;
+    }
   `,
 };

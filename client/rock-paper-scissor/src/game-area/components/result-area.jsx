@@ -1,22 +1,30 @@
 import React from "react";
 import styled from "styled-components";
 import { OptionCard } from "./option-card";
+import { Text } from "../../components/atoms/text";
 
 export const ResultArea = ({ userSelection, oppositionSelection }) => (
   <S.Section>
     <S.Description>
-      {getTextToShow(userSelection, oppositionSelection)}
+      <Text size="large" textAlign="center" weight="strong">
+        {getTextToShow(userSelection, oppositionSelection)}
+      </Text>
     </S.Description>
     <S.Box>
       <S.Choice>
-        <S.Text>Your Choice:</S.Text>
-        {userSelection && <OptionCard cardType={userSelection} />}
+        <Text textAlign="center" weight="mediumStrong" size="medium">
+          Your Choice:
+        </Text>
+        {userSelection && (
+          <OptionCard cardType={userSelection} isChoice noAnimate />
+        )}
       </S.Choice>
-
       <S.Choice>
-        <S.Text>Opponents Choice:</S.Text>
+        <Text textAlign="center" weight="mediumStrong" size="medium">
+          Opponent's Choice:
+        </Text>
         {oppositionSelection && userSelection && (
-          <OptionCard cardType={oppositionSelection} />
+          <OptionCard cardType={oppositionSelection} isChoice noAnimate />
         )}
       </S.Choice>
     </S.Box>
@@ -37,18 +45,10 @@ const S = {
     gap: 1rem;
     align-items: center;
   `,
-  Text: styled.p`
-    text-align: center;
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 20px;
-    font-style: italics;
-  `,
-  Description: styled.h3`
-    font-family: "Edu TAS Beginner", sans-serif;
-    font-size: 18px;
-    text-align: center;
-    margin-block: 4rem;
+  Description: styled.div`
+    display: flex;
+    justify-content: center;
+    margin-block: 2rem;
   `,
   Box: styled.div`
     display: flex;
