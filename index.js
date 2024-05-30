@@ -45,6 +45,11 @@ io.on("connection", (socket) => {
   });
 
   socket.on("findPlayer", ({ username }) => {
+    if (players.includes(username)) {
+      socket.emit("duplicateUsername");
+      return;
+    }
+
     players.push(username);
 
     if (players.length >= 2) {

@@ -4,7 +4,9 @@ import { io } from "socket.io-client";
 const deployedServerURL = "https://rock-paper-scissor-game-ioii.onrender.com";
 
 const URL =
-  process.env.NODE_ENV === "production" ? deployedServerURL : deployedServerURL;
+  process.env.NODE_ENV === "production"
+    ? deployedServerURL
+    : "http://localhost:4000";
 
 export const socketInstance = io(URL);
 

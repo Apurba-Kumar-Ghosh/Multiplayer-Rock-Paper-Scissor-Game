@@ -30,14 +30,23 @@ export const LandingPage = () => {
     socket.on("leave", disconnectFromGame);
     socket.on("error", disconnectFromGame);
     socket.on("disconnect", leaveGame);
+    socket.on("duplicateUsername", onDuplicateUsername);
 
     return () => {
       socket.off("leave", disconnectFromGame);
       socket.off("error", disconnectFromGame);
       socket.off("disconnect", leaveGame);
+      socket.off("duplicateUsername", onDuplicateUsername);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const onDuplicateUsername = () => {
+    disconnectFromGame({
+      message:
+        "This username is already taken. Please use a different username",
+    });
+  };
 
   const leaveGame = () => {
     disconnectFromGame({ message: DEFAULT_ERROR_MESSAGE });
