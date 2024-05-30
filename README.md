@@ -2,13 +2,9 @@ This is a multiplayer rock paper and scissor game created using React and Socket
 
 Steps to start in your local server:
 1. Open repository directory in terminal
-2. Run Command -> npm install
-3. Run command -> cd client/rock-paper-scissor
-4. Run command -> npm install
-5. Run Command -> cd ..
-6. Run Command -> cd ..
-7. Run Command -> npm run start-server
-9. Run Command -> npm run start-client
+2. Run Command -> `npm run build-start-server` -> This command will install all dependencies and start your server
+3. Open a new terminal instance
+4. Run Command -> `npm run build-start-client` -> This command will install all dependencies ans start your client -> You should be redirected to localhost:3000 once this command is completed.
 
 
 Steps to play:
