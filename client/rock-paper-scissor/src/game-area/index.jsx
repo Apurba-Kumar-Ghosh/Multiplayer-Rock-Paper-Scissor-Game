@@ -17,7 +17,8 @@ export const GameArea = ({ username, players, roomId }) => {
   const { updateLeaderboard, leaderboard } = useLeaderboard();
 
   useEffect(() => {
-    const currentHigh = leaderboard ? leaderboard[username] ?? 0 : 0;
+    const currentHigh =
+      leaderboard && leaderboard[username] ? leaderboard[username] : 0;
     if (userScore > currentHigh) updateLeaderboard(username, userScore);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps

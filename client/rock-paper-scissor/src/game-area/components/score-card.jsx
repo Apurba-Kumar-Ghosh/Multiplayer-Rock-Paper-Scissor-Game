@@ -8,29 +8,29 @@ export const Scorecard = ({ user, opp, userScore, oppScore }) => {
       <S.Score>
         <Text
           size="large"
-          textAlign="center"
+          textalign="center"
           weight="strong"
           color={Colors.surface}
-          ellipsis
+          ellipsis="true"
         >{`${user}(You)`}</Text>
         <S.Count>
-          <Text size="large" weight="strong" inline={false}>
+          <Text size="large" weight="strong" inline="false">
             {userScore}
           </Text>
         </S.Count>
       </S.Score>
       <S.Score>
         <S.Count>
-          <Text size="large" weight="strong" inline={false}>
+          <Text size="large" weight="strong" inline="false">
             {oppScore}
           </Text>
         </S.Count>
         <Text
           size="large"
-          textAlign="center"
+          textalign="center"
           weight="strong"
           color={Colors.surface}
-          ellipsis
+          ellipsis="true"
         >
           {opp}
         </Text>

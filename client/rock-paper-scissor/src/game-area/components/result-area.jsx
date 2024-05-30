@@ -6,13 +6,13 @@ import { Text } from "../../components/atoms/text";
 export const ResultArea = ({ userSelection, oppositionSelection }) => (
   <S.Section>
     <S.Description>
-      <Text size="large" textAlign="center" weight="strong">
+      <Text size="large" textalign="center" weight="strong">
         {getTextToShow(userSelection, oppositionSelection)}
       </Text>
     </S.Description>
     <S.Box>
       <S.Choice>
-        <Text textAlign="center" weight="mediumStrong" size="medium">
+        <Text textalign="center" weight="mediumStrong" size="medium">
           Your Choice:
         </Text>
         {userSelection && (
@@ -20,7 +20,7 @@ export const ResultArea = ({ userSelection, oppositionSelection }) => (
         )}
       </S.Choice>
       <S.Choice>
-        <Text textAlign="center" weight="mediumStrong" size="medium">
+        <Text textalign="center" weight="mediumStrong" size="medium">
           Opponent's Choice:
         </Text>
         {oppositionSelection && userSelection && (

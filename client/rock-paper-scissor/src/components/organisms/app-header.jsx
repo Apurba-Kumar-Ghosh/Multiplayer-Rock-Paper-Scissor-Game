@@ -2,13 +2,17 @@ import styled from "styled-components";
 import { Colors } from "../../utils/style-helpers/color-styles";
 import { Text } from "../atoms/text";
 
-export const AppHeader = ({ title, onClick, btnTitle }) => (
+export const AppHeader = ({
+  title = DEFAULTS.title,
+  onClick = DEFAULTS.onClick,
+  btnTitle,
+}) => (
   <S.Header>
     <Text
       size="xlarge"
       weight="mediumStrong"
       color={Colors.tertiary}
-      lineHeight={4}
+      lineheight={4}
     >
       {title}
     </Text>
@@ -18,7 +22,7 @@ export const AppHeader = ({ title, onClick, btnTitle }) => (
   </S.Header>
 );
 
-AppHeader.defaultProps = {
+const DEFAULTS = {
   title: "Rock Paper Scissor Game",
   onClick: () => window.location.reload(),
 };

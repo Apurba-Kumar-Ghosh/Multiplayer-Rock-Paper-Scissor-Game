@@ -25,8 +25,16 @@ export const useLeaderboard = () => {
     }));
   };
 
+  const isLeaderboardEmpty = () => {
+    if (!leaderboard) return true;
+    const keys = Object.keys(leaderboard);
+
+    return keys.length === 0;
+  };
+
   return {
     leaderboard,
     updateLeaderboard,
+    isLeaderboardEmpty,
   };
 };

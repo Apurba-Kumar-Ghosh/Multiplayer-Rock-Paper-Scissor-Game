@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from "react";
+import React, { useContext, useRef } from "react";
 import { io } from "socket.io-client";
 
 const URL =
@@ -10,10 +10,6 @@ const SocketContext = React.createContext(undefined);
 
 export const SocketContextProvider = ({ children }) => {
   const socket = useRef(socketInstance);
-
-  useEffect(() => {
-    console.log("socket instance changed");
-  }, [socket]);
 
   return (
     <SocketContext.Provider value={{ socket: socket.current }}>

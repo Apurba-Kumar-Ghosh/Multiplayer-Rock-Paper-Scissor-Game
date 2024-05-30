@@ -5,28 +5,28 @@ import { Colors } from "../../utils/style-helpers/color-styles";
 import { Text } from "../../components/atoms/text";
 
 export const Leaderboard = () => {
-  const { leaderboard } = useLeaderboard();
+  const { leaderboard, isLeaderboardEmpty } = useLeaderboard();
+
+  if (isLeaderboardEmpty()) return <></>;
 
   return (
-    leaderboard && (
-      <S.Table>
-        <S.Header>
-          <Icon name="trophy" size={30} color="#F26856" />
-          <S.h1>Points Leaderboard</S.h1>
-        </S.Header>
-        {getTopFive(leaderboard).map((entry, index) => (
-          <S.ListItem key={entry[0]}>
-            <S.Bullet>{index + 1}</S.Bullet>
-            <Text textAlign="left" color={Colors.tertiary} ellipsis>
-              {entry[0]}
-            </Text>
-            <Text textAlign="right" color={Colors.tertiary}>
-              {entry[1]}
-            </Text>
-          </S.ListItem>
-        ))}
-      </S.Table>
-    )
+    <S.Table>
+      <S.Header>
+        <Icon name="trophy" size={30} color="#F26856" />
+        <S.h1>Points Leaderboard</S.h1>
+      </S.Header>
+      {getTopFive(leaderboard).map((entry, index) => (
+        <S.ListItem key={entry[0]}>
+          <S.Bullet>{index + 1}</S.Bullet>
+          <Text textalign="left" color={Colors.tertiary} ellipsis="true">
+            {entry[0]}
+          </Text>
+          <Text textalign="right" color={Colors.tertiary}>
+            {entry[1]}
+          </Text>
+        </S.ListItem>
+      ))}
+    </S.Table>
   );
 };
 

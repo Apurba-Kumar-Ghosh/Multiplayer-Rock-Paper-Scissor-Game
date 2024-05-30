@@ -7,7 +7,7 @@ export const OptionCard = ({ cardType, onClick, isChoice, noAnimate }) => (
   <S.Card
     className={isChoice && !noAnimate ? "animation" : undefined}
     onClick={onClick}
-    ischoice={isChoice}
+    ischoice={isChoice.toString()}
   >
     <Icon
       name={cardType}
@@ -35,12 +35,12 @@ const S = {
     align-items: center;
     border-radius: 8px;
     background: ${({ ischoice }) =>
-      ischoice ? Colors.primary : "transparent"};
+      ischoice === "true" ? Colors.primary : "transparent"};
     transition: 0.2s ease-out;
 
     &:hover {
       background: ${({ ischoice }) =>
-        ischoice ? Colors.primary : Colors.primaryFaded};
+        ischoice === "true" ? Colors.primary : Colors.primaryFaded};
       cursor: pointer;
       transform: scale(0.95);
     }

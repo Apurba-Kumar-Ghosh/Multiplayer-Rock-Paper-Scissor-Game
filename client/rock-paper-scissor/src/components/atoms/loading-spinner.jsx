@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-export const LoadingSpinner = ({ size }) => (
+export const LoadingSpinner = ({ size = DEFAULTSIZE }) => (
   <S.Ring size={size}>
     <div></div>
     <div></div>
@@ -10,9 +10,7 @@ export const LoadingSpinner = ({ size }) => (
   </S.Ring>
 );
 
-LoadingSpinner.defaultProps = {
-  size: 80,
-};
+const DEFAULTSIZE = 80;
 
 const S = {
   Ring: styled.div`

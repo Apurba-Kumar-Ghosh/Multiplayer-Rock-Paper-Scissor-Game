@@ -5,7 +5,7 @@ import { Text } from "./text";
 
 export const Button = ({ onClick, title, disabled, style }) => (
   <S.Button onClick={onClick} disabled={disabled} style={{ ...style }}>
-    <Text size="normal" weight="mediumStrong" lineHeight={3}>
+    <Text size="normal" weight="mediumStrong" lineheight={3}>
       {title}
     </Text>
   </S.Button>
