@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import "../App.css";
 import { useSocketContext } from "../socket";
 import { AddUsername } from "./components/add-username";
 import { GameArea } from "../game-area";
