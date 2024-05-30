@@ -28,13 +28,24 @@ export const LandingPage = () => {
 
   useEffect(() => {
     socket.on("leave", disconnectFromGame);
+    socket.on("error", disconnectFromGame);
+    socket.on("disconnect", leaveGame);
 
-    return () => socket.off("leave", disconnectFromGame);
+    return () => {
+      socket.off("leave", disconnectFromGame);
+      socket.off("error", disconnectFromGame);
+      socket.off("disconnect", leaveGame);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const disconnectFromGame = () => {
-    alert("Your opponent has disconnected. Please start new game");
+  const leaveGame = () => {
+    disconnectFromGame({ message: DEFAULT_ERROR_MESSAGE });
+  };
+
+  const disconnectFromGame = ({ message }) => {
+    console.log("error");
+    alert(message);
     window.location.reload();
   };
 
@@ -111,3 +122,5 @@ const S = {
     align-items: center;
   `,
 };
+
+const DEFAULT_ERROR_MESSAGE = "Something went wrong. Please join new game.";

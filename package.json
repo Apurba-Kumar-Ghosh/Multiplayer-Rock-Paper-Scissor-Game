@@ -7,9 +7,13 @@
     "build-start-server": "npm install && npx nodemon index.js",
     "build-start-client": "cd client/rock-paper-scissor && npm install && npm start",
     "start-server": "npx nodemon index.js",
+    "start": "node index.js",
     "start-client": "cd client && cd rock-paper-scissor && npm start"
   },
-  "author": "",
+  "engines": {
+    "node": "20.x"
+  },
+  "author": "Apurba Ghosh",
   "license": "ISC",
   "description": "",
   "dependencies": {

@@ -14,24 +14,33 @@ let availableRooms = [];
 
 let roomsInUse = {};
 
+app.get("/healthcheck", (req, res) => {
+  res.send("App Running");
+});
+
 const io = new Server(server, {
   cors: {
     origin: "http://localhost:3000",
   },
 });
 
-app.get("/test", (req, res) => {
-  res.send("RPS app running...");
-});
-
 io.on("connection", (socket) => {
+  socket.on("disconnect", () => {
+    socket.emit("leave", {
+      message: "Something went wrong. Please restart",
+    });
+  });
   socket.on("disconnecting", (data) => {
     const socketRooms = socket.rooms;
     socketRooms.forEach((room) => {
-      socket.to(room).emit("leave");
+      socket.to(room).emit("leave", {
+        message: "Your opponent has left the game. Please join a new game.",
+      });
       if (roomsInUse[room]) {
         delete roomsInUse[room];
       }
+      const avRoom = availableRooms.findIndex((currRoom) => currRoom === room);
+      if (avRoom !== -1) availableRooms.splice(avRoom, 1);
     });
   });
 
@@ -46,6 +55,13 @@ io.on("connection", (socket) => {
         socket.emit("Error", {
           message: "Something went wrong, please try joining again",
         });
+        availableRooms.forEach((currRoom) => {
+          socket.to(currRoom).emit("Error", {
+            message: "Something went wrong. Please try again",
+          });
+        });
+        availableRooms.splice(0, availableRooms.length);
+        players.splice(0, players.length);
       } else {
         socket.join(room);
 
@@ -110,9 +126,9 @@ io.on("connection", (socket) => {
   });
 });
 
-server.listen(4000, () => {
-  console.log("listening on port 4000");
-});
+const port = 4000;
+
+server.listen(process.env.PORT ?? port);
 
 function checkWinner({ p1, p2 }) {
   if (p1 === "scissor") {
