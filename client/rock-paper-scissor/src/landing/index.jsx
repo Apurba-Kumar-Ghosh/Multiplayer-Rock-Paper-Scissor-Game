@@ -24,6 +24,18 @@ export const LandingPage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [username]);
 
+  useEffect(() => {
+    socket.on("leave", disconnectFromGame);
+
+    return () => socket.off("leave", disconnectFromGame);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const disconnectFromGame = () => {
+    alert("Your opponent has disconnected. Please start new game");
+    window.location.reload();
+  };
+
   const createGamePeripherals = ({ roomId, allPlayers }) => {
     setGameState("joined");
     setRoomId(roomId);

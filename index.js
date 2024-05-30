@@ -25,10 +25,14 @@ app.get("/test", (req, res) => {
 });
 
 io.on("connection", (socket) => {
-  //   console.log("a client connected");
-
-  socket.on("disconnect", () => {
-    // console.log("disconnected");
+  socket.on("disconnecting", (data) => {
+    const socketRooms = socket.rooms;
+    socketRooms.forEach((room) => {
+      socket.to(room).emit("leave");
+      if (roomsInUse[room]) {
+        delete roomsInUse[room];
+      }
+    });
   });
 
   socket.on("findPlayer", ({ username }) => {
@@ -87,7 +91,6 @@ io.on("connection", (socket) => {
         p1: playerObj.p1.choice,
         p2: playerObj.p2.choice,
       });
-      console.log("winner", winner);
       declareWinner(winner, roomId);
     }
   });
@@ -102,7 +105,6 @@ io.on("connection", (socket) => {
         p1: playerObj.p1.choice,
         p2: playerObj.p2.choice,
       });
-      console.log("winner", winner);
       declareWinner(winner, roomId);
     }
   });
