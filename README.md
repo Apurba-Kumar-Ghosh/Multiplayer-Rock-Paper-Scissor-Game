@@ -23,4 +23,4 @@ Steps to play:
 Have fun playing.
 
 
-PS: If you face some issue with cross-connection..Please restart the server with command: `npm run start-server`
+PS: If you face some issue with cross-connection or not joining game even if you have two instances runnign...Please restart the server with command: `npm run start-server` and try again. 
