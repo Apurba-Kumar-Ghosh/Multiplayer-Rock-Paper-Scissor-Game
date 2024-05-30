@@ -17,7 +17,7 @@ export const Leaderboard = () => {
         {getTopFive(leaderboard).map((entry, index) => (
           <S.ListItem key={entry[0]}>
             <S.Bullet>{index + 1}</S.Bullet>
-            <Text textAlign="left" color={Colors.tertiary}>
+            <Text textAlign="left" color={Colors.tertiary} ellipsis>
               {entry[0]}
             </Text>
             <Text textAlign="right" color={Colors.tertiary}>
@@ -47,6 +47,7 @@ const S = {
     border-radius: 8px;
     padding: 0 1rem;
     box-shadow: 0 7px 30px rgba(62, 9, 11, 0.3);
+    max-width: 22rem;
 
     & :last-child {
       border-radius: 0 0 8px 8px;
