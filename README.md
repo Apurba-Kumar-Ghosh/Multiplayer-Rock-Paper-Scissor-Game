@@ -21,3 +21,6 @@ Steps to play:
 11. After 1 game you should be able to see the Points Leaderboar on the landing page.
 
 Have fun playing.
+
+
+PS: If you face some issue with cross-connection..Please restart the server with command: `npm run start-server`
