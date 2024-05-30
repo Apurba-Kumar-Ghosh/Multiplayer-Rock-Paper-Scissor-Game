@@ -14,9 +14,13 @@ Steps to play:
 4. Enter your username and click on Join Game
 5. You will be added to waiting lobby -> waiting for opponent to get matched
 6. Open new tab and go to `localhost:3000` and do the same there.
-7. You should be redirected into a game of Rock Paper and Scissor
-8. Play and see if you can win against yourself
-9. If your opponent gets disconnected -> you will be removed from the game as well.
-10. After 1 game you should be able to see the Points Leaderboar on the landing page.
+7. You can create as many game instances as you want. Each instance will be paired with another instance(if available).
+8. You should be redirected into a game of Rock Paper and Scissor
+9. Play and see if you can win against yourself
+10. If your opponent gets disconnected -> you will be removed from the game as well.
+11. After 1 game you should be able to see the Points Leaderboar on the landing page.
 
 Have fun playing.
+
+
+PS: If you face some issue with cross-connection or not joining game even if you have two instances runnign...Please restart the server with command: `npm run start-server` and try again. 
