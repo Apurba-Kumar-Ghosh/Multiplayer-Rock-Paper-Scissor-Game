@@ -2,7 +2,7 @@
   "name": "rock-paper-scissor",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://apurba-kumar-ghosh.github.io/multiplayer-RPS-game",
+  "homepage": "https://Apurba-Kumar-Ghosh.github.io/multiplayer-RPS-game",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
