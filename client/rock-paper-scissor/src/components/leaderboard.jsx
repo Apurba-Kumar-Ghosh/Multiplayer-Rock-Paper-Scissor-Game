@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useLeaderboard } from "../hooks/use-local-storage";
-import { Images } from "../utils/imageHelper";
+import { Icon } from "./icons/icon";
 
 export const Leaderboard = () => {
   const { leaderboard } = useLeaderboard();
@@ -9,7 +9,7 @@ export const Leaderboard = () => {
     leaderboard && (
       <S.Table>
         <S.Header>
-          <S.Img width={30} height={30} src={Images.trophy} alt="trophy-icon" />
+          <Icon name="trophy" size={30} color="#F26856" />
           <S.h1>Most Points Scored</S.h1>
         </S.Header>
         {getTopFive(leaderboard).map((entry, index) => (
@@ -59,9 +59,6 @@ const S = {
     font-size: 18px;
     padding: 0.8rem 0.8rem 1.2rem;
     color: white;
-  `,
-  Img: styled.img`
-    object-fit: contain;
   `,
   ListItem: styled.div`
     display: grid;

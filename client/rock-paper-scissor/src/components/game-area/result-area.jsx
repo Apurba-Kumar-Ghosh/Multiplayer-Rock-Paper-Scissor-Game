@@ -64,10 +64,10 @@ const S = {
 };
 
 const getTextToShow = (userSelection, oppositionSelection) => {
-  if (!userSelection) return "Make your choice";
-
   if (!userSelection && oppositionSelection)
     return "Opponent has made his move. What about you?";
+
+  if (!userSelection) return "Make your choice";
 
   if (!oppositionSelection) return "Waiting for opponent to choose.";
   if (oppositionSelection === userSelection) return "STALEMATE!!! GO AGAIN!!!";
