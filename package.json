@@ -4,6 +4,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "build-start-server": "npm install && npx nodemon index.js",
+    "build-start-client": "cd client/rock-paper-scissor && npm install && npm start",
     "start-server": "npx nodemon index.js",
     "start-client": "cd client && cd rock-paper-scissor && npm start"
   },
