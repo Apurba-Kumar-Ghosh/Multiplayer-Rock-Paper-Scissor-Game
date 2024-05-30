@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/multiplayer-RPS-game/static/css/main.b617c69c.css",
+    "main.js": "/multiplayer-RPS-game/static/js/main.6c856bdb.js",
+    "static/js/453.ab56f3d3.chunk.js": "/multiplayer-RPS-game/static/js/453.ab56f3d3.chunk.js",
+    "static/media/game-sprite.svg": "/multiplayer-RPS-game/static/media/game-sprite.8e30055f4d3370e5df9c7eb175acc6b5.svg",
+    "index.html": "/multiplayer-RPS-game/index.html",
+    "main.b617c69c.css.map": "/multiplayer-RPS-game/static/css/main.b617c69c.css.map",
+    "main.6c856bdb.js.map": "/multiplayer-RPS-game/static/js/main.6c856bdb.js.map",
+    "453.ab56f3d3.chunk.js.map": "/multiplayer-RPS-game/static/js/453.ab56f3d3.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b617c69c.css",
+    "static/js/main.6c856bdb.js"
+  ]
+}
