@@ -18,12 +18,11 @@ export const useLeaderboard = () => {
     }
   }, [leaderboard]);
 
-  const updateLeaderboard = (name, count) => {
+  const updateLeaderboard = (name, count) =>
     setLeaderBoard((prev) => ({
       ...prev,
       [name]: count,
     }));
-  };
 
   const isLeaderboardEmpty = () => {
     if (!leaderboard) return true;

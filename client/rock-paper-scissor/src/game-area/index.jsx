@@ -17,12 +17,18 @@ export const GameArea = ({ username, players, roomId }) => {
   const { updateLeaderboard, leaderboard } = useLeaderboard();
 
   useEffect(() => {
-    const currentHigh =
+    const currentUserHigh =
       leaderboard && leaderboard[username] ? leaderboard[username] : 0;
-    if (userScore > currentHigh) updateLeaderboard(username, userScore);
+    const currentOppHigh =
+      leaderboard && leaderboard[players[opponent]]
+        ? leaderboard[players[opponent]]
+        : 0;
+    if (userScore > currentUserHigh) updateLeaderboard(username, userScore);
+    if (oppScore > currentOppHigh)
+      updateLeaderboard(players[opponent], oppScore);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userScore]);
+  }, [userScore, oppScore]);
 
   useEffect(() => {
     socket.on(`playerChoice`, addOpponentChoice);
