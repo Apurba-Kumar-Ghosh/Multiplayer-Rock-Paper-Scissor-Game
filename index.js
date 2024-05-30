@@ -20,7 +20,7 @@ app.get("/healthcheck", (req, res) => {
 
 const io = new Server(server, {
   cors: {
-    origin: "https://apurba-ghosh-game.netlify.app/",
+    origin: "https://apurba-ghosh-game.netlify.app",
   },
 });
 
