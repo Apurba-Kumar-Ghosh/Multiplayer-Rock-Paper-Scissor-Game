@@ -1,15 +1,17 @@
 import React from "react";
 import styled from "styled-components";
 
-export const LoadingSpinner = () => {
-  return (
-    <S.Ring>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-    </S.Ring>
-  );
+export const LoadingSpinner = ({ size }) => (
+  <S.Ring size={size}>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </S.Ring>
+);
+
+LoadingSpinner.defaultProps = {
+  size: 80,
 };
 
 const S = {
@@ -17,8 +19,8 @@ const S = {
     display: inline-block;
     position: relative;
     box-sizing: border-box;
-    width: 80px;
-    height: 80px;
+    width: ${({ size }) => `${size}px`};
+    height: ${({ size }) => `${size}px`};
     color: #1c4c5b;
     & div {
       box-sizing: border-box;

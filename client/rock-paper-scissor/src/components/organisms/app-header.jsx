@@ -1,18 +1,18 @@
 import styled from "styled-components";
+import { Colors } from "../../utils/style-helpers/color-styles";
 
-export const AppHeader = () => {
-  return (
-    <S.Header>
-      <S.Text>Rock Paper Scissor Game</S.Text>
-      <S.ChangeAccount
-        onClick={() => {
-          window.location.reload();
-        }}
-      >
-        Log Out
-      </S.ChangeAccount>
-    </S.Header>
-  );
+export const AppHeader = ({ title, onClick, btnTitle }) => (
+  <S.Header>
+    <S.Text>{title}</S.Text>
+    {btnTitle && (
+      <S.ChangeAccount onClick={onClick}>{btnTitle}</S.ChangeAccount>
+    )}
+  </S.Header>
+);
+
+AppHeader.defaultProps = {
+  title: "Rock Paper Scissor Game",
+  onClick: () => window.location.reload(),
 };
 
 const S = {
@@ -23,7 +23,7 @@ const S = {
     width: 100%;
     display: flex;
     padding: 0 2rem;
-    background: #3a404d;
+    background: ${Colors.primary};
     justify-content: space-between;
     align-items: center;
     z-index: 2;
@@ -44,6 +44,8 @@ const S = {
     height: 1.5rem;
     margin-right: 5rem;
     text-align: center;
+    display: flex;
+    align-items: center;
     border-radius: 6px;
     transition: 0.2s ease-out;
     background: white;
@@ -51,7 +53,7 @@ const S = {
 
     &:hover {
       cursor: pointer;
-      background: #3449eb;
+      background: ${Colors.secondary};
       color: white;
       transform: scale(1.2);
     }

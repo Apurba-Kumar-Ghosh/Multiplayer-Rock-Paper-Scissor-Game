@@ -2,32 +2,30 @@ import React from "react";
 import styled from "styled-components";
 import { OptionCard } from "./option-card";
 
-export const ResultArea = ({ userSelection, oppositionSelection }) => {
-  return (
-    <S.Section>
-      <S.Description>
-        {getTextToShow(userSelection, oppositionSelection)}
-      </S.Description>
-      <S.Box>
-        <S.Choice>
-          <S.Text>Your Choice:</S.Text>
-          {userSelection && <OptionCard cardType={userSelection} />}
-        </S.Choice>
+export const ResultArea = ({ userSelection, oppositionSelection }) => (
+  <S.Section>
+    <S.Description>
+      {getTextToShow(userSelection, oppositionSelection)}
+    </S.Description>
+    <S.Box>
+      <S.Choice>
+        <S.Text>Your Choice:</S.Text>
+        {userSelection && <OptionCard cardType={userSelection} />}
+      </S.Choice>
 
-        <S.Choice>
-          <S.Text>Opponents Choice:</S.Text>
-          {oppositionSelection && userSelection && (
-            <OptionCard cardType={oppositionSelection} />
-          )}
-        </S.Choice>
-      </S.Box>
-    </S.Section>
-  );
-};
+      <S.Choice>
+        <S.Text>Opponents Choice:</S.Text>
+        {oppositionSelection && userSelection && (
+          <OptionCard cardType={oppositionSelection} />
+        )}
+      </S.Choice>
+    </S.Box>
+  </S.Section>
+);
 
 const S = {
   Section: styled.section`
-    margin-block: 1rem 0;
+    margin-block: 2rem 0;
     width: 100%;
     display: grid;
     grid-template-columns: repeat(autfill, 1fr);
@@ -50,6 +48,7 @@ const S = {
     font-family: "Edu TAS Beginner", sans-serif;
     font-size: 18px;
     text-align: center;
+    margin-block: 4rem;
   `,
   Box: styled.div`
     display: flex;

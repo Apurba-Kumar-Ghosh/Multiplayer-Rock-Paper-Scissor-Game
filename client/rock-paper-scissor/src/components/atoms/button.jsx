@@ -1,27 +1,38 @@
 import styled from "styled-components";
 import React from "react";
+import { Colors } from "../../utils/style-helpers/color-styles";
 
-export const SubmitBtn = ({ onClick, title }) => (
-  <S.Button onClick={onClick}>
+export const Button = ({ onClick, title, disabled, style }) => (
+  <S.Button onClick={onClick} disabled={disabled} style={{ ...style }}>
     <S.Text>{title}</S.Text>
   </S.Button>
 );
 
 const S = {
-  Button: styled.div`
+  Button: styled.button`
     width: 10rem;
     border-radius: 6px;
     outline: none;
     border: 0.5px solid black;
     background: transparent;
-    color: #3449eb;
+    color: ${Colors.secondary};
     transition: 0.1s ease-in;
 
     &:hover {
-      background: #3449eb;
+      background: ${Colors.secondary};
       color: white;
       cursor: pointer;
       transform: scale(1.1);
+    }
+
+    &:disabled {
+      background: grey;
+
+      &:hover {
+        transform: none;
+        cursor: not-allowed;
+        color: ${Colors.secondary};
+      }
     }
   `,
   Text: styled.p`

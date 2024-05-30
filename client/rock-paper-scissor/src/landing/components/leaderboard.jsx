@@ -1,6 +1,7 @@
 import styled from "styled-components";
-import { useLeaderboard } from "../hooks/use-local-storage";
-import { Icon } from "./icons/icon";
+import { useLeaderboard } from "../../hooks/use-leaderboard";
+import { Icon } from "../../components/icon/icon";
+import { Colors } from "../../utils/style-helpers/color-styles";
 
 export const Leaderboard = () => {
   const { leaderboard } = useLeaderboard();
@@ -50,7 +51,7 @@ const S = {
     width: 100%;
     display: flex;
     gap: 1rem;
-    background: #3a404d;
+    background: ${Colors.primary};
     align-items: center;
     padding: 0 1rem;
     border-radius: 8px 8px 0 0;
@@ -64,7 +65,7 @@ const S = {
     display: grid;
     padding: 0.8rem 1rem 1.2rem;
     width: 100%;
-    background: #d7514d;
+    background: ${Colors.surface};
     grid-template-columns: 1fr 3fr 2fr;
     align-items: center;
     transition: 0.1s linear;

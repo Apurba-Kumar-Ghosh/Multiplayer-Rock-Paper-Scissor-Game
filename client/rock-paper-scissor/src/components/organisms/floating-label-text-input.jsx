@@ -1,7 +1,14 @@
 import React from "react";
 import styled from "styled-components";
+import { Colors } from "../../utils/style-helpers/color-styles";
 
-export const MaterialTextInput = ({ value, onChange, error }) => (
+export const FloatingLabelTextInput = ({
+  value,
+  onChange,
+  error,
+  disabled,
+  label,
+}) => (
   <S.Box>
     <S.Input
       value={value}
@@ -9,8 +16,9 @@ export const MaterialTextInput = ({ value, onChange, error }) => (
         onChange(event.target.value);
       }}
       placeholder=""
+      disabled={disabled}
     />
-    <S.Label>Enter your username</S.Label>
+    <S.Label>{label}</S.Label>
     {error && <S.Error>*{error}</S.Error>}
   </S.Box>
 );
@@ -33,17 +41,19 @@ const S = {
     background: #f39264;
     border: none;
     outline: none;
-    color: #3a404d;
+    color: ${Colors.primary};
     transition: 0.2s ease-out;
 
     &:focus + span {
-      top: 0;
-      color: #3449eb;
+      top: -10px;
+      left: -6px;
+      color: ${Colors.secondary};
       transform: translateY(-50%) scale(0.9) !important;
     }
 
     &:not(:placeholder-shown) + span {
-      top: 0;
+      top: -10px;
+      left: -6px
       transform: translateY(-50%) scale(0.9);
     }
     &:not(:focus)::placeholder {
@@ -53,7 +63,7 @@ const S = {
   Label: styled.span`
     position: absolute;
     font-size: 1rem;
-    color: #3a404d;
+    color: ${Colors.primary};
     top: 50%;
     left: 2%;
     transform: translateY(-50%);

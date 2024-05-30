@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useSocketContext } from "../../socket";
+import { useSocketContext } from "../socket";
 import styled from "styled-components";
-import { OptionCard } from "./option-card";
-import { ResultArea } from "./result-area";
-import { useLeaderboard } from "../../hooks/use-local-storage";
+import { OptionCard } from "./components/option-card";
+import { ResultArea } from "./components/result-area";
+import { useLeaderboard } from "../hooks/use-leaderboard";
 
 export const GameArea = ({ username, players, roomId }) => {
   const [userScore, setUserScore] = useState(0);

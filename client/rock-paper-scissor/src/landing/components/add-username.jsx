@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { MaterialTextInput } from "./material-text-input";
-import { SubmitBtn } from "./submit-btn";
+import { FloatingLabelTextInput } from "../../components/organisms/floating-label-text-input";
+import { Button } from "../../components/atoms/button";
 import styled from "styled-components";
 
-export const AddUsername = ({ onAddUsername, value, onChange }) => {
+export const AddUsername = ({ onAddUsername, value, onChange, gameState }) => {
   const [error, setError] = useState();
 
   const onSubmit = () => {
@@ -11,11 +11,19 @@ export const AddUsername = ({ onAddUsername, value, onChange }) => {
     else onAddUsername(value);
   };
 
+  const isDisabled = gameState !== "none";
+
   return (
     <S.Container>
       <S.Text>Enter your username and join to play</S.Text>
-      <MaterialTextInput value={value} onChange={onChange} error={error} />
-      <SubmitBtn onClick={onSubmit} title="Join a game" />
+      <FloatingLabelTextInput
+        value={value}
+        onChange={onChange}
+        error={error}
+        disabled={isDisabled}
+        label="Enter your username"
+      />
+      <Button onClick={onSubmit} title="Join a game" disabled={isDisabled} />
     </S.Container>
   );
 };
