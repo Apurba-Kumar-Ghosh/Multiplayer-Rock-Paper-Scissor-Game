@@ -3,6 +3,7 @@ This is a multiplayer rock paper and scissor game created using React and Socket
 If you only want to play: https://apurba-ghosh-game.netlify.app/
 
 This project contains both the server(index.js) and the client(/client/rock-paper-scissor)
+Also a separate repo is available if you just want to take a look at client side code: https://github.com/Apurba-Kumar-Ghosh/Stone-Paper-Scissor-App-Client
 If you want to take a peek at the code do the following to get started on your local machine:
 1. Open repository directory in terminal
 2. Run Command -> `npm run build-start-server` -> This command will install all dependencies and start your server
