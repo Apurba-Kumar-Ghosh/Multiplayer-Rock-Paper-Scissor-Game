@@ -20,6 +20,3 @@ Steps to play:
 9. If your opponent gets disconnected(closes browser tab) -> you will be removed from the game as well.
 
 Have fun playing.
-
-
-PS: If you face some issue with cross-connection or not joining game even if you have two instances runnign...Please restart the server with command: `npm run start-server` and try again. 
